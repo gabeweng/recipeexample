@@ -49,3 +49,16 @@ overall_chain = SequentialChain(
     output_variables=["meals", "gangster_meals"],
     verbose=True
 )
+
+#streamlit
+
+st.title("Meal planner")
+user_prompt = st.text_input("A comma-separated list of ingredients")
+
+if st.button("Generate") and user_prompt:
+    with st.spinner("Generating..."):
+        output = overall_chain({'ingredients': user_prompt})
+
+        col1, col2 = st.columns(2)
+        col1.write(output['meals'])
+        col2.write(output['gangster_meals'])
